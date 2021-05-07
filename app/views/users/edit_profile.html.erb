@@ -1,0 +1,60 @@
+<h1>Edit profile</h1>
+<br>
+<%= form_with model: @user, url: update_profile_user_path(@user) do |form| %>
+  <% if @user.errors.any? %>
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <div class="field form-group row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :name, class:"form-control col-sm-5",:value => @user.name %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :email_address, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :email, class:"form-control col-sm-5", :value => @user.email %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :Type, class:"col-sm-2 col-form-label" %>
+    <%= form.select(:role, options_for_select(User.types, selected: @user.role.to_i)) %>
+  </div>
+  <div class="field form-group row">
+    <%= form.label :phone, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :phone, class:"form-control col-sm-5", :value => @user.phone  %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :date_of_birth, class:"col-sm-2 col-form-label" %>
+    <%= form.date_field :dob, class:"form-control col-sm-5", :value => @user.dob  %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :address, class:"col-sm-2 col-form-label" %>
+    <%= form.text_area :address, class:"form-control col-sm-5", :value => @user.address  %>
+  </div>
+
+    <div class="field form-group row">
+    <%= form.label :old_profile, class:"col-sm-2 col-form-label" %>
+    <%= image_tag @user.profile, class:"form-control col-sm-2", style: 'height:150px;width:auto;' %>
+  </div>
+
+    <div class="field form-group row">
+    <%= form.label :new_profile, class:"col-sm-2 col-form-label" %>
+    <%= form.file_field :profile, class:"form-control col-sm-5" %>
+  </div>
+  <%= form.hidden_field :id, :value =>@user.id%>
+  <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+
+  <div class="actions">
+    <%= form.submit "Edit", class:"btn btn-secondary" %>
+    <input type="reset" value="Clear" class="btn btn-dark">
+    <%= link_to  "Change Password", change_password_user_path(id: @user.id) %>
+    <a href=>
+  </div>
+  
+<% end %>

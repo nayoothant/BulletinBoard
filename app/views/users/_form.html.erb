@@ -1,0 +1,62 @@
+<%= form_with model: @user, url: create_confirm_users_path(@user) do |form| %>
+  <% if @user.errors.any? %>
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <div class="field form-group row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :name, class:"form-control col-sm-5" %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :email_address, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :email, class:"form-control col-sm-5" %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :password, class:"col-sm-2 col-form-label" %>
+    <%= form.password_field :password, class:"form-control col-sm-5" %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :confirm_password, class:"col-sm-2 col-form-label" %>
+    <%= form.password_field :password_confirmation, class:"form-control col-sm-5" %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :Type, class:"col-sm-2 col-form-label" %>
+    <%= form.select(:role, options_for_select(User.types))%>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :phone, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :phone, class:"form-control col-sm-5" %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :date_of_birth, class:"col-sm-2 col-form-label" %>
+    <%= form.date_field :dob, class:"form-control col-sm-5" %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :address, class:"col-sm-2 col-form-label" %>
+    <%= form.text_area :address, class:"form-control col-sm-5" %>
+  </div>
+
+    <div class="field form-group row">
+    <%= form.label :profile, class:"col-sm-2 col-form-label" %>
+    <%= form.file_field :profile, class:"form-control col-sm-5" %>
+  </div>
+  <%= form.hidden_field :create_user_id, :value => current_user.id%>
+  <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-secondary" %>
+    <%= link_to 'Back', users_path , class:"btn btn-dark" %>
+  </div>
+  
+<% end %>

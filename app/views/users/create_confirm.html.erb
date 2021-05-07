@@ -1,0 +1,66 @@
+<h1>Confirm User</h1>
+<br>
+<%= form_with model: @user do |form| %>
+  <% if @user.errors.any? %>
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <div class="field form-group row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :name, class:"form-control col-sm-5",:value => @user.name, :readonly => true %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :email_address, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :email, class:"form-control col-sm-5", :value => @user.email, :readonly => true  %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :password, class:"col-sm-2 col-form-label" %>
+    <%= form.password_field :password, class:"form-control col-sm-5", :value => @user.password, :readonly => true  %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :confirm_password, class:"col-sm-2 col-form-label" %>
+    <%= form.password_field :password_confirmation, class:"form-control col-sm-5", :value => @user.password_confirmation, :readonly => true  %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :Type, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :role, :value => User.types.keys[@user.role.to_i], :readonly => true, class:"form-control col-sm-5"%>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :phone, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :phone, class:"form-control col-sm-5", :value => @user.phone, :readonly => true  %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :date_of_birth, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :dob, class:"form-control col-sm-5", :value => @user.dob, :readonly => true  %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :address, class:"col-sm-2 col-form-label" %>
+    <%= form.text_area :address, class:"form-control col-sm-5", :value => @user.address, :readonly => true  %>
+  </div>
+
+    <div class="field form-group row">
+    <%= form.label :profile, class:"col-sm-2 col-form-label" %>
+    <%= image_tag @user.profile, class:"form-control col-sm-5", style: 'height:500px;width:auto;' %>
+    <%= form.hidden_field :profile, :value => @user.profile%>
+  </div>
+
+  <%= form.hidden_field :create_user_id, :value => @user.create_user_id%>
+  <%= form.hidden_field :updated_user_id, :value => @user.updated_user_id%>
+
+  <div class="actions">
+    <%= form.submit "Create", class:"btn btn-secondary" %>
+    <%= link_to 'Cancel', users_path , class:"btn btn-dark" %>
+  </div>
+  
+<% end %>
