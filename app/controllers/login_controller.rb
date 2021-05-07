@@ -21,5 +21,10 @@ class LoginController < ApplicationController
       redirect_to login_path, notice: "Email or password is invalid"
     end
   end
+
+  def logout
+    cookies.delete(:user_id)
+    redirect_to login_path
+  end
    
 end

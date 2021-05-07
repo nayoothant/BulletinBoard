@@ -34,5 +34,14 @@ class UserService
             @to_date = params[:to_date]
             @users = UserRepository.searchUser(@name, @email, @from_date, @to_date)
         end
+
+        def updatePassword(user, params)
+            isUpdatedPassword = UserRepository.updatePassword(user, params)
+        end
+
+        def deleteUser(user_id,deleted_user_id)
+            user = getUserById(user_id)
+            UserRepository.deleteUser(user, deleted_user_id)
+        end
     end
 end

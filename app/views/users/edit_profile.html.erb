@@ -21,7 +21,7 @@
 
   <div class="field form-group row">
     <%= form.label :Type, class:"col-sm-2 col-form-label" %>
-    <%= form.select(:role, options_for_select(User.types, selected: @user.role.to_i)) %>
+    <%= form.select(:role, options_for_select(User.types, selected: @user.role.to_i), {}, {:class => "form-control col-sm-5"}) %>
   </div>
   <div class="field form-group row">
     <%= form.label :phone, class:"col-sm-2 col-form-label" %>

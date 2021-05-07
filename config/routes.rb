@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       post :create_confirm
-      get :create_confirm, to: "user#new"
+      get :create_confirm, to: "users#new"
       get :search_user
     end
     member do
@@ -11,10 +11,13 @@ Rails.application.routes.draw do
       get :edit_profile, to: "users#edit_profile"
       patch :update_profile
       get :change_password
+      post :update_password
     end
   end
+  
   get 'users/new'
   get 'login', to: 'login#login'
   post 'login', to: 'login#userlogin'
+  get 'logout', to: 'login#logout'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

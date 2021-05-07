@@ -44,5 +44,19 @@ class UserRepository
                 users = User.where(deleted_user_id: nil).where("name like ? and email like ?", "%" + name + "%", "%" + email + "%")
             end
         end
+
+        def updatePassword(user, params)
+            isUpdatedPassword = user.update(
+                'password' => params[:new_password],
+                'updated_user_id' => params[:id]
+            )
+        end
+
+        def deleteUser(user, deleted_user_id)
+            user.update(
+                'deleted_at' => Time.now,
+                'deleted_user_id' => deleted_user_id
+            )
+        end
     end
 end

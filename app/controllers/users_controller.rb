@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :authorized
 
   def index
     @users = UserService.listAll
@@ -77,6 +77,27 @@ class UsersController < ApplicationController
   def search_user
     @users = UserService.searchUser(params)
     render :index
+  end
+
+  def update_password
+    user = UserService.getUserById(params[:id])
+    if !user.authenticate(params[:password])
+      redirect_to change_password_user_path, notice: "The Password is incorrect"
+    elsif  params[:new_password] != params[:new_password_confirmation]
+      redirect_to change_password_user_path, notice: "New password confirmation is not matched"
+    else
+      isUpdatedPassword = UserService.updatePassword(user, params)
+      if isUpdatedPassword
+        redirect_to users_path
+      else
+        redirect_to change_password_user_path
+      end
+    end
+  end
+
+  def destroy
+    UserService.deleteUser(params[:id],current_user[:id])
+    redirect_to users_path
   end
 
   private
