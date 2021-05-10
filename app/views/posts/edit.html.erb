@@ -1,0 +1,39 @@
+<h1>Edit Post</h1>
+<br>
+<%= form_with model: @post, :url => update_confirm_post_path(@post) do |form| %>
+  <% if @post.errors.any? %>
+      <ul>
+        <% @post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <div class="field form-group row">
+    <%= form.label :title, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :title, class:"form-control col-sm-5",:value => @post.title %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :description, class:"col-sm-2 col-form-label" %>
+    <%= form.text_area :description, class:"form-control col-sm-5", :value => @post.description %>
+  </div>
+  <div class="field form-group row">
+  <%= form.label :status, class:"col-sm-2 col-form-label" %>
+    <div class="custom-switch align-self-center">
+        <%= form.check_box :status, class:"custom-control-input", id: "customSwitch1", :value => @post.status %>
+        <label class="custom-control-label" for="customSwitch1"></label>
+    </div>
+  </div>
+
+  
+  <%= form.hidden_field :id, :value =>@post.id %>
+  <%= form.hidden_field :updated_user_id, :value => current_user.id %>
+  <%= form.hidden_field :create_user_id, :value => current_user.id %>
+
+  <div class="actions">
+    <%= form.submit "Edit", class:"btn btn-secondary" %>
+    <input type="reset" value="Clear" class="btn btn-dark">
+  </div>
+  
+<% end %>

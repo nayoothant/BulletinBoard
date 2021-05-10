@@ -14,6 +14,16 @@ Rails.application.routes.draw do
       post :update_password
     end
   end
+
+  resources :posts do
+    collection do
+    end
+    member do
+      get :update_confirm, to: "posts#update_confirm"
+      patch :update_confirm
+      post :update_post
+    end
+  end
   
   get 'users/new'
   get 'login', to: 'login#login'

@@ -1,0 +1,49 @@
+<h1>Post List</h1>
+<br>
+<div class="table_container">
+  <table id="list" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead class="thead-dark">
+      <tr>
+        <th>Post Title</th>
+        <th>Post Description</th>
+        <th>Posted User</th>
+        <th>Posted Date</th>
+        <th colspan="2">Operation</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.title %></td>
+          <td><%= post.description %></td>
+          <td><%= post.created_user.name %></td>
+          <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= link_to "Edit",edit_post_path(post), class: 'btn btn-primary'  %>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+<script>
+$(document).ready(function () {
+      var dataTable = null
+
+    document.addEventListener("turbolinks:before-cache", function() {
+      if (dataTable !== null) {
+      dataTable.destroy()
+      dataTable = null
+      }
+    })
+  dataTable = $('#list').DataTable({
+    "searching": false,
+    "ordering": false,
+    "bLengthChange": false,
+    "info": false,
+    "pageLength": 5,
+  });
+  $('.dataTables_length').addClass('bs-select');
+});
+</script>

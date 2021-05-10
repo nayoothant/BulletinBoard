@@ -21,7 +21,9 @@
   </head>
 
   <body>
-  <%= render "layouts/header" %>
+    <% if logged_in? %>
+      <%= render 'layouts/header' %>
+    <% end %>
     <div class="container">
       <br/>
       <% if notice %>
@@ -31,3 +33,4 @@
     </div>
   </body>
 </html>
+
