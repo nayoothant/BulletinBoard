@@ -1,0 +1,29 @@
+<h1>Confirm Post</h1>
+<br>
+<%= form_with model: @post do |form| %>
+
+  <div class="field form-group row">
+    <%= form.label :title, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :title, class:"form-control col-sm-5", readonly: 'true' %>
+    <% if @post.errors[:title].any? %>
+      <span style="color:red;">Title <%= @post.errors[:title][0] %>
+    <% end %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :description, class:"col-sm-2 col-form-label" %>
+    <%= form.text_area :description, class:"form-control col-sm-5", readonly: 'true' %>
+    <% if @post.errors[:description].any? %>
+      <span style="color:red;">Description <%= @post.errors[:description][0] %>
+    <% end %>
+  </div>
+
+  <%= form.hidden_field :create_user_id, :value => current_user.id%>
+  <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+
+  <div class="actions">
+    <%= form.submit "Create", class:"btn btn-secondary" %>
+    <%= link_to "Cancel", 'javascript:history.go(-1);', class: 'btn btn-dark' %>
+  </div>
+  
+<% end %>

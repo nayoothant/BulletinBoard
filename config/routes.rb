@@ -17,10 +17,13 @@ Rails.application.routes.draw do
 
   resources :posts do
     collection do
+      post :post_create_confirm
+      get :post_create_confirm, to: "posts#new"
+      get :search_post
     end
     member do
       get :update_confirm, to: "posts#update_confirm"
-      patch :update_confirm
+      post :update_confirm
       post :update_post
     end
   end

@@ -1,9 +1,9 @@
 <h1>Confirm Post</h1>
 <br>
-<%= form_with model: @post, url: update_post_post_path(@post) do |form| %>
-  <% if @post.errors.any? %>
+<%= form_with scope: @post_form, url: update_post_post_path(@post_form.id) do |form| %>
+  <% if @post_form.errors.any? %>
       <ul>
-        <% @post.errors.each do |error| %>
+        <% @post_form.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -11,23 +11,23 @@
 
   <div class="field form-group row">
     <%= form.label :title, class:"col-sm-2 col-form-label" %>
-    <%= form.text_field :title, class:"form-control col-sm-5",:value => @post.title, :readonly => true %>
+    <%= form.text_field :title, class:"form-control col-sm-5", :readonly => true %>
   </div>
 
   <div class="field form-group row">
     <%= form.label :description, class:"col-sm-2 col-form-label" %>
-    <%= form.text_area :description, class:"form-control col-sm-5", :value => @post.description, :readonly => true %>
+    <%= form.text_area :description, class:"form-control col-sm-5", :readonly => true %>
   </div>
   <div class="field form-group row">
   <%= form.label :status, class:"col-sm-2 col-form-label" %>
     <div class="custom-switch align-self-center">
-        <%= form.check_box :status, class:"custom-control-input", id: "customSwitch1", :value => @post.status, :disable => true %>
+        <%= form.check_box :status, class:"custom-control-input", id: "customSwitch1", :disabled => 'true'%>
         <label class="custom-control-label" for="customSwitch1"></label>
     </div>
   </div>
 
-  
-  <%= form.hidden_field :id, :value =>@post.id%>
+  <%= form.hidden_field :status %>
+  <%= form.hidden_field :id, :value =>@post_form.id%>
   <%= form.hidden_field :updated_user_id, :value => current_user.id%>
   <%= form.hidden_field :create_user_id, :value => current_user.id %>
 
