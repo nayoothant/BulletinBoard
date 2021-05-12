@@ -1,13 +1,14 @@
-<h1>Post List</h1>
-<br>
+<div class="card">
+  <h1 class="card-header">Post List</h1>
+  <div class="card-body">
   <%= form_tag({ :action => :search_post }, { :method => :get }) do %>
       <div class="field form-group row float-right">
           <label class="col-form-label mr-2">Keyword:</label>
           <%= text_field_tag :keyword, params[:keyword], class: "form-control col-sm-3 mr-2" %>
           <%= submit_tag ("Search"), class: 'btn btn-secondary mr-2' %>
           <%= link_to "Create", new_post_path,  class: 'btn btn-primary mr-2' %>
-          <%= link_to "Upload", posts_path, class: 'btn btn-primary mr-2' %>
-          <%= link_to "Download", posts_path, class: 'btn btn-primary' %>
+          <%= link_to "Upload", upload_csv_posts_path, class: 'btn btn-primary mr-2' %>
+          <%= link_to "Download", download_posts_path(format: :csv), class: 'btn btn-primary' %>
       </div>
   <% end %>
 <div class="table_container">
@@ -36,6 +37,8 @@
     </tbody>
   </table>
 </div>
+</div>
+  </div>
 </div>
 <script>
 $(document).ready(function () {

@@ -1,5 +1,6 @@
-<h1>Create Post</h1>
-<br>
+<div class="card">
+  <h1 class="card-header">Create Post</h1>
+  <div class="card-body">
 <%= form_with model: @post, url: post_create_confirm_posts_path(@post) do |form| %>
 
   <div class="field form-group row">
@@ -27,3 +28,5 @@
   </div>
   
 <% end %>
+  </div>
+</div>

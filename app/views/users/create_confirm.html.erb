@@ -1,13 +1,7 @@
-<h1>Confirm User</h1>
-<br>
+<div class="card">
+  <h1 class="card-header">Confirm User</h1>
+  <div class="card-body">
 <%= form_with model: @user do |form| %>
-  <% if @user.errors.any? %>
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-  <% end %>
 
   <div class="field form-group row">
     <%= form.label :name, class:"col-sm-2 col-form-label" %>
@@ -64,3 +58,5 @@
   </div>
   
 <% end %>
+  </div>
+</div>

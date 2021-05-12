@@ -1,5 +1,6 @@
-<h1>Confirm Post</h1>
-<br>
+<div class="card">
+  <h1 class="card-header">Confirm Post</h1>
+  <div class="card-body">
 <%= form_with scope: @post_form, url: update_post_post_path(@post_form.id) do |form| %>
   <% if @post_form.errors.any? %>
       <ul>
@@ -37,3 +38,5 @@
   </div>
   
 <% end %>
+  </div>
+</div>

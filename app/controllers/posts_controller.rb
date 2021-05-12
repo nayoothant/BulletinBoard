@@ -57,6 +57,32 @@ class PostsController < ApplicationController
         redirect_to posts_path
     end
 
+    def import_csv
+        sdf
+        expected_header = ["title", "description", "status"]
+        updated_user_id = current_user.id
+        create_user_id = current_user.id
+        if (params[:file].nil?)
+            redirect_to upload_csv_posts_path, notice: "Please select a file"            
+        else
+            has_error = true if !PostsHelper.check_header(expected_header,params[:file])
+            if has_error
+                redirect_to upload_csv_posts_path, notice: "The Header is wrong"
+            else 
+                Post.import(params[:file],create_user_id,updated_user_id)
+                redirect_to posts_path, notice: "The Posts are uploaded successfully"
+            end
+        end
+    end
+
+    def download
+        @posts = PostService.getAllPosts
+        respond_to do |format|
+            format.html
+            format.csv { send_data @posts.to_csv,  :filename => "Post List.csv" }
+          end
+    end
+
     private
 
     # post parameters

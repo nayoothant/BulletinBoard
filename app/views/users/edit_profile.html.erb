@@ -1,5 +1,6 @@
-<h1>Edit profile</h1>
-<br>
+<div class="card">
+  <h1 class="card-header">Edit Profile</h1>
+  <div class="card-body">
 <%= form_with model: @user, url: update_profile_user_path(@user) do |form| %>
   <% if @user.errors.any? %>
       <ul>
@@ -58,3 +59,5 @@
   </div>
   
 <% end %>
+  </div>
+</div>

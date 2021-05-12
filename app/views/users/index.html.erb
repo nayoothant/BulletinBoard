@@ -1,5 +1,6 @@
-<h1>User List</h1>
-<br>
+<div class="card" style="width:1140px;">
+  <h1 class="card-header">User List</h1>
+  <div class="card-body">
   <%= form_tag({ :action => :search_user }, { :method => :get }) do %>
       <div class="field form-group row">
           <label class="col-sm-1 col-form-label">Name:</label>
@@ -59,6 +60,8 @@
 <br>
 <%= link_to 'New User', new_user_path , class:"btn btn-secondary"  %>
 
+</div>
+  </div>
 </div>
 <style>
 #dtBasicExample {
