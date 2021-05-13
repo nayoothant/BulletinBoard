@@ -1,12 +1,14 @@
 module PostsHelper
     def self.check_header(expected_header,csv_file)
         header = CSV.open(csv_file, 'r') { |csv| csv.first }
-        valid_csv = true 
+        error_msg = "" 
         for i in (0..header.size-1)
           if header[i].downcase != expected_header[i].downcase
-            valid_csv = false
+            error_msg = Messages::WRONG_HEADER
+          elsif (header.size != 3)
+            error_msg = Messages::WRONG_COLUMN
           end
         end
-      return valid_csv
+      return error_msg
     end
 end

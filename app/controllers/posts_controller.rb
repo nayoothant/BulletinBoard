@@ -95,11 +95,13 @@ class PostsController < ApplicationController
         updated_user_id = current_user.id
         create_user_id = current_user.id
         if (params[:file].nil?)
-            redirect_to upload_csv_posts_path, notice: Messages::REQUIRE_FILE_VALIDATION         
+            redirect_to upload_csv_posts_path, notice: Messages::REQUIRE_FILE_VALIDATION        
+        elsif !File.extname(params[:file]).eql?(".csv")
+            redirect_to upload_csv_posts_path, notice: Messages::WRONG_FILE_TYPE  
         else
-            has_error = true if !PostsHelper.check_header(Constants::HEADER,params[:file])
-            if has_error
-                redirect_to upload_csv_posts_path, notice: Messages::INCORRECT_HEADER_VALIDATION
+            error_msg = PostsHelper.check_header(Constants::HEADER,params[:file])
+            if error_msg.present?
+                redirect_to upload_csv_posts_path, notice: error_msg
             else 
                 Post.import(params[:file],create_user_id,updated_user_id)
                 redirect_to posts_path, notice: Messages::UPLOAD_SUCCESSFUL

@@ -11,6 +11,9 @@ module Messages
     REQUIRE_FILE_VALIDATION = "Please select a file"  
     INCORRECT_HEADER_VALIDATION = "The Header is incorrect"
     UPLOAD_SUCCESSFUL = "CSV file is uploaded successfully"
+    WRONG_HEADER = "The header is wrong"
+    WRONG_COLUMN = "The Column is wrong"
+    WRONG_FILE_TYPE = "Please select CSV file"
 
     #messages for user validations
     CREATE_SUCCESSFUL = "User is created successfully"
