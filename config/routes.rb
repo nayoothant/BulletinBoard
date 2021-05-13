@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     member do
       get :profile, to: "users#profile"
       get :edit_profile, to: "users#edit_profile"
-      patch :update_profile
+      post :update_profile
+      get :update_profile, to: "users#edit_profile"
       get :change_password
       post :update_password
     end

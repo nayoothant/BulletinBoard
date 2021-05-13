@@ -1,60 +1,76 @@
 <div class="card">
   <h1 class="card-header">Edit Profile</h1>
   <div class="card-body">
-<%= form_with model: @user, url: update_profile_user_path(@user) do |form| %>
-  <% if @user.errors.any? %>
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-  <% end %>
+<%= form_with model: @profile_form, url: update_profile_user_path(@profile_form.id) do |form| %>
 
   <div class="field form-group row">
     <%= form.label :name, class:"col-sm-2 col-form-label" %>
-    <%= form.text_field :name, class:"form-control col-sm-5",:value => @user.name %>
+    <%= form.text_field :name, class:"form-control col-sm-5",:value => @profile_form.name %>
+    <% if @profile_form.errors[:name].any? %>
+      <span style="color:red;">Name <%= @profile_form.errors[:name][0] %>
+    <% end %>
   </div>
 
   <div class="field form-group row">
     <%= form.label :email_address, class:"col-sm-2 col-form-label" %>
-    <%= form.text_field :email, class:"form-control col-sm-5", :value => @user.email %>
+    <%= form.text_field :email, class:"form-control col-sm-5", :value => @profile_form.email %>
+    <% if @profile_form.errors[:email].any? %>
+      <span style="color:red;">Email <%= @profile_form.errors[:email][0] %>
+    <% end %>
   </div>
 
   <div class="field form-group row">
     <%= form.label :Type, class:"col-sm-2 col-form-label" %>
-    <%= form.select(:role, options_for_select(User.types, selected: @user.role.to_i), {}, {:class => "form-control col-sm-5"}) %>
+    <%= form.select(:role, options_for_select(Constants::TYPES, selected: @profile_form.role.to_i), {}, {:class => "form-control col-sm-5"}) %>
+    <% if @profile_form.errors[:role].any? %>
+      <span style="color:red;">Role <%= @profile_form.errors[:role][0] %>
+    <% end %>
   </div>
+
   <div class="field form-group row">
     <%= form.label :phone, class:"col-sm-2 col-form-label" %>
-    <%= form.text_field :phone, class:"form-control col-sm-5", :value => @user.phone  %>
+    <%= form.text_field :phone, class:"form-control col-sm-5", :value => @profile_form.phone  %>
+    <% if @profile_form.errors[:phone].any? %>
+      <span style="color:red;">Phone <%= @profile_form.errors[:phone][0] %>
+    <% end %>
   </div>
 
   <div class="field form-group row">
     <%= form.label :date_of_birth, class:"col-sm-2 col-form-label" %>
-    <%= form.date_field :dob, class:"form-control col-sm-5", :value => @user.dob  %>
+    <%= form.date_field :dob, class:"form-control col-sm-5", :value => @profile_form.dob  %>
+    <% if @profile_form.errors[:dob].any? %>
+      <span style="color:red;">Date Of Birth <%= @profile_form.errors[:dob][0] %>
+    <% end %>
   </div>
 
   <div class="field form-group row">
     <%= form.label :address, class:"col-sm-2 col-form-label" %>
-    <%= form.text_area :address, class:"form-control col-sm-5", :value => @user.address  %>
+    <%= form.text_area :address, class:"form-control col-sm-5", :value => @profile_form.address  %>
+        <% if @profile_form.errors[:address].any? %>
+      <span style="color:red;">Address <%= @profile_form.errors[:address][0] %>
+    <% end %>
   </div>
 
     <div class="field form-group row">
     <%= form.label :old_profile, class:"col-sm-2 col-form-label" %>
-    <%= image_tag @user.profile, class:"form-control col-sm-2", style: 'height:150px;width:auto;' %>
+    <%= image_tag @profile_form.profile, class:"form-control col-sm-2", style: 'height:150px;width:auto;' %>
+    <% if @profile_form.errors[:profile].any? %>
+      <span style="color:red;">Profile <%= @profile_form.errors[:profile][0] %>
+    <% end %>
   </div>
 
-    <div class="field form-group row">
+  <div class="field form-group row">
     <%= form.label :new_profile, class:"col-sm-2 col-form-label" %>
-    <%= form.file_field :profile, class:"form-control col-sm-5" %>
+    <%= form.file_field :new_profile, class:"form-control col-sm-5" %>
   </div>
-  <%= form.hidden_field :id, :value =>@user.id%>
+  <%= form.hidden_field :profile, :value =>@profile_form.profile%>
+  <%= form.hidden_field :id, :value =>@profile_form.id%>
   <%= form.hidden_field :updated_user_id, :value => current_user.id%>
 
   <div class="actions">
     <%= form.submit "Edit", class:"btn btn-secondary" %>
     <input type="reset" value="Clear" class="btn btn-dark">
-    <%= link_to  "Change Password", change_password_user_path(id: @user.id) %>
+    <%= link_to  "Change Password", change_password_user_path(id: @profile_form.id) %>
     <a href=>
   </div>
   

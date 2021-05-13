@@ -34,7 +34,7 @@
 
   <div class="field form-group row">
     <%= form.label :Type, class:"col-sm-2 col-form-label" %>
-    <%= form.select(:role, options_for_select(User.types), {}, {:class => "form-control col-sm-5"})%>
+    <%= form.select(:role, options_for_select(Constants::TYPES), {}, {:class => "form-control col-sm-5"})%>
   </div>
 
   <div class="field form-group row">

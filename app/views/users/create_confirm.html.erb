@@ -25,7 +25,7 @@
 
   <div class="field form-group row">
     <%= form.label :Type, class:"col-sm-2 col-form-label" %>
-    <%= form.text_field :role, :value => User.types.keys[@user.role.to_i], :readonly => true, class:"form-control col-sm-5"%>
+    <%= form.text_field :role, :value => Constants::TYPES.keys[@user.role.to_i], :readonly => true, class:"form-control col-sm-5"%>
   </div>
 
   <div class="field form-group row">
