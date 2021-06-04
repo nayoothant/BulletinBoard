@@ -1,46 +1,58 @@
+
+<video id="webcam" autoplay playsinline width="640" height="480"></video>
+<canvas id="canvas" class="d-none"></canvas>
+<button class="btn btn-primary btn-block" onclick="snap()">Snap</button>
 <div class="pt-5">
   <h1 class="text-center">Log In</h1>
-<div class="container">
-                <div class="row">
-                       
-                      
-                    <div class = "card col-md-5 mx-auto round_corner">
-                      <div class="card-body">
-                                                    
-                            <%= form_tag login_path do %>
-                                <div class="form-group required">
-                                    <label for="username">Email</label>
-                                    <%= text_field_tag :email, params[:email], class: 'form-control text-lowercase' %>
-                                </div>                    
-                                <div class="form-group required">
-                                    <label class="d-flex flex-row align-items-center" for="password">Password 
-                                        <a class="ml-auto border-link small-xl" href="#">Forget?</a></label>
-                                    <%= password_field_tag :password ,params[:password_digest], class: 'form-control'%>
-                                </div>
-                                <div class="form-group mt-4 mb-4">
-                                    <div class="custom-control custom-checkbox">
-                                        <%= check_box_tag :remember_me, 1, params[:remember_me], class: "custom-control-input", id: "remember-me", name: "remember-me" %>
-                                        <label class="custom-control-label" for="remember-me">Remember me?</label>
-                                    </div>
-                                </div>
-                                <div class="form-group pt-1">
-                                    <button class="btn btn-primary btn-block" type="submit">Log In</button>
-                                </div>
-                            </form>
-                            <p class="small-xl pt-3 text-center">
-                                <span class="text-muted">Not a member?</span>
-                                <a href="#">Sign up</a>
-                            </p>
-                            <% end %>
+    <div class="container">
+        <div class="row">                     
+            <div class = "card col-md-5 mx-auto round_corner">
+                <div class="card-body">
+                                            
+                    <%= form_tag login_path do %>
+                        <div class="form-group required">
+                            <label for="email">Email</label>
+                            <%= text_field_tag :email, params[:email], class: 'form-control' %>
+                        </div>                    
+                        <div class="form-group required">
+                            <label class="d-flex flex-row align-items-center" for="password">Password 
+                                <a class="ml-auto border-link small-xl" href="<%= password_resets_new_path %>">Forget?</a></label>
+                            <%= password_field_tag :password ,params[:password_digest], class: 'form-control'%>
                         </div>
-                    </div>
+                        <div class="form-group mt-4 mb-4">
+                            <div class="custom-control custom-checkbox">
+                                <%= check_box_tag :remember_me, 1, params[:remember_me], class: "custom-control-input", id: "remember-me", name: "remember-me" %>
+                                <label class="custom-control-label" for="remember-me">Remember me?</label>
+                            </div>
+                        </div>
+                        <div class="form-group pt-1">
+                            <button class="btn btn-primary btn-block" type="submit">Log In</button>
+                        </div>
+                    </form>
+                    <p class="small-xl pt-3 text-center">
+                        <span class="text-muted">Not a member?</span>
+                        <%= link_to "Sign up", sign_up_path %>
+                    </p>
+                    <% end %>
                 </div>
             </div>
+        </div>
+    </div>
 </div>
+<script>
+const webcamElement = document.getElementById('webcam');
+const canvasElement = document.getElementById('canvas');
+const webcam = new Webcam(webcamElement, 'user', canvasElement);
+webcam.start()
+   .then(result =>{
+      console.log("webcam started");
+   })
+   .catch(err => {
+       console.log(err);
+   });
 
-<style>
-.round_corner{
-  border-radius : 10px;
-  box-shadow: 10px 10px 10px 10px rgb(0 0 0 / 20%)
+function snap() {
+  var picture = webcam.snap();
+  console.log(picture)
 }
-</style>
+</script>

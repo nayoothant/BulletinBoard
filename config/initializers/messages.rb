@@ -6,6 +6,7 @@ module Messages
     PASSWORD_REQUIRE_VALIDATION = "Password is required"
     SUCCESSFUL_LOG_IN = "Logged in successfully!"
     INVALID_EMAIL_OR_PASSWORD = "Email or password is invalid"
+    SUCCESSFUL_SIGN_UP = "Signed up successfully!"
 
     #messages for post csv validations
     REQUIRE_FILE_VALIDATION = "Please select a file"  
@@ -19,4 +20,12 @@ module Messages
     CREATE_SUCCESSFUL = "User is created successfully"
     INCORRECT_PASSWORD = "The Password is incorrect"
     INCORRECT_PASSWORD_CONFIRM = "New password confirmation is not matched"
+
+    #messages for password reset validations
+    EMAIL_IS_SENT = "Email sent with password reset instructions."
+    USER_NOT_EXIST = "The user does not exist"
+    PASSWORD_RESET_EXPIRED = "Password reset has expired."
+    PASSWORD_RESET_NOT_MATCH = "Passwords are not match."
+    RESET_PASSWORD = "Password has been reset!"
+
 end

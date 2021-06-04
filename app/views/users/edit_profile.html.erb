@@ -61,11 +61,15 @@
 
   <div class="field form-group row">
     <%= form.label :new_profile, class:"col-sm-2 col-form-label" %>
-    <%= form.file_field :new_profile, class:"form-control col-sm-5" %>
+    <%= form.file_field :new_profile, class:"form-control col-sm-5", :accept => "image/x-png,image/gif,image/jpeg" %>
   </div>
   <%= form.hidden_field :profile, :value =>@profile_form.profile%>
   <%= form.hidden_field :id, :value =>@profile_form.id%>
-  <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+  <% if current_admin.present? %>
+    <%= form.hidden_field :updated_user_id, :value => current_admin.id %>
+  <% else %>
+    <%= form.hidden_field :updated_user_id, :value => current_user.id %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit "Edit", class:"btn btn-secondary" %>

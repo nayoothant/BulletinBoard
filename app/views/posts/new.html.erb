@@ -18,9 +18,13 @@
       <span style="color:red;">Description <%= @post.errors[:description][0] %>
     <% end %>
   </div>
-
-  <%= form.hidden_field :create_user_id, :value => current_user.id%>
-  <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+  <% if current_admin.present? %>
+    <%= form.hidden_field :updated_user_id, :value => current_admin.id %>
+    <%= form.hidden_field :create_user_id, :value => current_admin.id %>
+  <% else %>
+    <%= form.hidden_field :updated_user_id, :value => current_user.id %>
+    <%= form.hidden_field :create_user_id, :value => current_user.id %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit "Create", class:"btn btn-secondary" %>

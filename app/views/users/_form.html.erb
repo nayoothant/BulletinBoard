@@ -63,13 +63,13 @@
 
     <div class="field form-group row">
     <%= form.label :profile, class:"col-sm-2 col-form-label" %>
-    <%= form.file_field :profile, class:"form-control col-sm-5" %>
+    <%= form.file_field :profile, class:"form-control col-sm-5", :accept => "image/x-png,image/gif,image/jpeg" %>
     <% if @user.errors[:profile].any? %>
       <span style="color:red;">Profile <%= @user.errors[:profile][0] %>
     <% end %>
   </div>
-  <%= form.hidden_field :create_user_id, :value => current_user.id%>
-  <%= form.hidden_field :updated_user_id, :value => current_user.id%>
+  <%= form.hidden_field :create_user_id, :value => current_admin.id%>
+  <%= form.hidden_field :updated_user_id, :value => current_admin.id%>
 
   <div class="actions">
     <%= form.submit class:"btn btn-secondary" %>

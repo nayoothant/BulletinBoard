@@ -12,7 +12,7 @@
       </div>
   <% end %>
 <div class="table_container">
-  <table id="list" class="table table-bordered table-sm" cellspacing="0" width="100%">
+  <table id="list" class="table table-bordered table-sm" cellspacing="0">
     <thead class="thead-light">
       <tr>
         <th>Post Title</th>
@@ -26,18 +26,49 @@
     <tbody>
       <% @posts.each do |post| %>
         <tr>
-          <td><%= post.title %></td>
+          <td><%= link_to post.title, post_path(post), {:remote => true, 'data-toggle' =>  "modal"} %></td>
           <td><%= post.description %></td>
           <td><%= post.created_user.name %></td>
           <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= link_to "Edit",edit_post_path(post), class: 'btn btn-primary mr-2'  %>
-          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+          <% if current_user.present? %>
+            <% if current_user.name == post.created_user.name %>
+              <td><%= link_to "Edit",edit_post_path(post), class: 'btn btn-primary mr-2'  %>
+              <%= link_to 'Delete', '#', "data-toggle"=>"modal", "data-target" => "#deletepost_#{post.id}",:class=>'btn btn-danger' %></td>
+              <% else %>
+              <td></td>
+            <% end %>
+          <% else %>
+            <td><%= link_to "Edit",edit_post_path(post), class: 'btn btn-primary mr-2'  %>
+            <%= link_to 'Delete', '#', "data-toggle"=>"modal", "data-target" => "#deletepost_#{post.id}",:class=>'btn btn-danger' %></td>
+          <% end %>
+          <div class="modal fade" id="deletepost_<%= post.id %>">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                  <h5 class="modal-title">Post Detete Confirmation</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure to delete?</p>
+                    </div>
+                      <div class="modal-footer">
+                        <a href="#" data-dismiss="modal" class="btn btn-info">Cancel</a>
+                        <%= link_to 'Delete', post_path(post), method: :delete, :class => 'btn btn-danger' %>
+                      </div>
+                  </div>
+                </div>
+              </div>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 </div>
+  </div>
+</div>
+
+<div id="postDetail" class="modal fade" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:700px"></div>
   </div>
 </div>
 <script>

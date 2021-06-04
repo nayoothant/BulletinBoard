@@ -131,7 +131,7 @@ class UsersController < ApplicationController
   # delete user
   # params : id
   def destroy
-    UserService.deleteUser(params[:id],current_user[:id])
+    UserService.deleteUser(params[:id],current_admin[:id])
     redirect_to users_path
   end
 

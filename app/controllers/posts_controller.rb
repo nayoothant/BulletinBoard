@@ -15,6 +15,14 @@ class PostsController < ApplicationController
         @post = Post.new()
     end
 
+    # function : show
+    # show post detail
+    # params : post_id
+    # return : @post
+    def show
+        @post = PostService.getPostById(params[:id])    
+    end
+
     # function : edit
     # show edit post page
     # params : id
@@ -84,7 +92,11 @@ class PostsController < ApplicationController
     # delete post
     # params : post id
     def destroy
-        PostService.deletePost(params[:id],current_user[:id])
+        if current_admin.present?            
+            PostService.deletePost(params[:id],current_admin[:id])
+        else            
+            PostService.deletePost(params[:id],current_user[:id])
+        end
         redirect_to posts_path
     end
 
@@ -92,8 +104,13 @@ class PostsController < ApplicationController
     # upload post csv file
     # params : file
     def import_csv
-        updated_user_id = current_user.id
-        create_user_id = current_user.id
+        if current_admin.present? 
+            updated_user_id = current_admin.id
+            create_user_id = current_admin.id
+        else
+            updated_user_id = current_user.id
+            create_user_id = current_user.id
+        end
         if (params[:file].nil?)
             redirect_to upload_csv_posts_path, notice: Messages::REQUIRE_FILE_VALIDATION        
         elsif !File.extname(params[:file]).eql?(".csv")

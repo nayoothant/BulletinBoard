@@ -1,0 +1,80 @@
+<div class="pt-3">
+  <h1 class="text-center">Sign Up</h1>
+<div class="container">
+                <div class="row">
+                       
+                      
+                    <div class = "card col-md-5 mx-auto round_corner">
+                      <div class="card-body">
+                                                  
+                                <%= form_with model: @user, url: '/sign_up', method: :post do |form| %>
+                                <div class="form-group required"> 
+                                    <%= image_tag 'default.jpg', id: "profile", class: "d-flex justify-content-center rounded-circle mb-3" %>
+                                    <label for="profile">Profile</label>
+                                    <% if @user.errors[:profile].any? %>
+                                    <span class="error">Profile <%= @user.errors[:profile][0] %></span>
+                                    <% end %>
+                                    <%= form.file_field :profile, :onchange => "readURL(this);" ,class: "form-control" , :accept => "image/x-png,image/gif,image/jpeg" %>
+                                </div>
+                                <div class="form-group required">
+                                    <label for="username">Name</label>                                        
+                                    <% if @user.errors[:name].any? %>
+                                        <span class="error">Name <%= @user.errors[:name][0] %></span>
+                                    <% end %>
+                                    <%= form.text_field :name, class: 'form-control' %>
+                                </div>
+                                <div class="form-group required">
+                                    <label for="email">Email</label>
+                                    <% if @user.errors[:email].any? %>
+                                        <span class="error">Email <%= @user.errors[:email][0] %></span>
+                                    <% end %>     
+                                    <%= form.text_field :email, class: 'form-control' %>
+                                </div>           
+                                <div class="form-group required">
+                                    <label for="password">Password</label>
+                                    <% if @user.errors[:password].any? %>
+                                    <span class="error">Password <%= @user.errors[:password][0] %></span>
+                                    <% end %>
+                                    <%= form.password_field :password, class: 'form-control'%>
+                                </div>
+                                <div class="form-group pt-1">
+                                    <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+                                </div>
+                                <%= form.hidden_field :role, value: "1" %>
+                                <%= form.number_field :create_user_id, value: 1, type: :hidden %>
+                                <%= form.number_field :updated_user_id, value: 1, type: :hidden %>
+                            </form>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<style>
+#profile {
+    height: 150px;
+    width: 150px;
+    margin: auto;
+}
+.error {
+    color: red;
+    float: right;
+}
+</style>
+<script>
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profile')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>

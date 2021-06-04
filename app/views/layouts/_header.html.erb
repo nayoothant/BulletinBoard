@@ -15,19 +15,32 @@
         </li>          
     </ul>
     <ul class="navbar-nav my-sm-0">
+    <% if current_admin.present? %>
       <li class="nav-item">
         <%= link_to "Create User", new_user_path , class:"nav-link" %>
       </li>
+    <% end %>
       <li class="nav-item">
       <div class="dropdown show">
-        <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= current_user.name %>
-        </a>
+        <% if current_admin.present? %>
+          <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_admin.name %>
+          </a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left:-54px;">
-          <a class="dropdown-item" href="/users/<%= current_user.id %>/profile">Profile</a>
-          <%= link_to "Log Out", logout_path , class:"dropdown-item" %>
-        </div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left:-65px;">
+            <a class="dropdown-item" href="/users/<%= current_admin.id %>/profile">Profile</a>
+            <%= link_to "Log Out", logout_path , class:"dropdown-item" %>
+          </div>
+        <% else %>
+          <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.name %>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left:-76px;">
+            <a class="dropdown-item" href="/users/<%= current_user.id %>/profile">Profile</a>
+            <%= link_to "Log Out", logout_path , class:"dropdown-item" %>
+          </div>        
+      <% end %>
       </div>
       </li>
     </ul>

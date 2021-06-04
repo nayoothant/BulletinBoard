@@ -28,8 +28,14 @@
 
   
   <%= form.hidden_field :id, :value =>@post_form.id %>
-  <%= form.hidden_field :updated_user_id, :value => current_user.id %>
-  <%= form.hidden_field :create_user_id, :value => current_user.id %>
+  <% if current_admin.present? %>
+    <%= form.hidden_field :updated_user_id, :value => current_admin.id %>
+    <%= form.hidden_field :create_user_id, :value => current_admin.id %>
+  <% else %>
+    <%= form.hidden_field :updated_user_id, :value => current_user.id %>
+    <%= form.hidden_field :create_user_id, :value => current_user.id %>
+  <% end %>
+
 
   <div class="actions">
     <%= form.submit "Edit", class:"btn btn-secondary" %>

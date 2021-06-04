@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_035947) do
+ActiveRecord::Schema.define(version: 2021_05_18_022237) do
 
   create_table "posts", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(version: 2021_05_07_035947) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "auth_token"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.index ["create_user_id"], name: "fk_rails_bc60bf1428"
     t.index ["updated_user_id"], name: "fk_rails_562ffc0a48"
   end
