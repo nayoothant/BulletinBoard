@@ -1,7 +1,4 @@
 
-<video id="webcam" autoplay playsinline width="640" height="480"></video>
-<canvas id="canvas" class="d-none"></canvas>
-<button class="btn btn-primary btn-block" onclick="snap()">Snap</button>
 <div class="pt-5">
   <h1 class="text-center">Log In</h1>
     <div class="container">
@@ -39,20 +36,3 @@
         </div>
     </div>
 </div>
-<script>
-const webcamElement = document.getElementById('webcam');
-const canvasElement = document.getElementById('canvas');
-const webcam = new Webcam(webcamElement, 'user', canvasElement);
-webcam.start()
-   .then(result =>{
-      console.log("webcam started");
-   })
-   .catch(err => {
-       console.log(err);
-   });
-
-function snap() {
-  var picture = webcam.snap();
-  console.log(picture)
-}
-</script>
